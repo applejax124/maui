@@ -85,7 +85,7 @@ stages:
             - ${{ if not(containsValue(project.androidApiLevelsExclude, api)) }}:
               - ${{ each category in parameters.categoriesToTest }}:
                 - job: android_ui_tests_${{ project.name }}_${{ api }}_${{ category }}
-                  dependentOn: build_android_ui_tests
+                  dependsOn: build_android_ui_tests
                   timeoutInMinutes: 240 # how long to run the job before automatically cancelling
                   workspace:
                     clean: all

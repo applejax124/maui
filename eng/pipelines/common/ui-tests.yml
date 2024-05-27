@@ -42,11 +42,11 @@ stages:
           - ${{ each api in parameters.androidApiLevels }}:
             - ${{ if not(containsValue(project.androidApiLevelsExclude, api)) }}:
               - ${{ each category in parameters.categoriesToTest }}:
-                - job: android_ui_tests_${{ project.name }}_${{ api }}
+                - job: android_ui_tests_${{ project.name }}_${{ api }}_${{ category }}
                   timeoutInMinutes: 240 # how long to run the job before automatically cancelling
                   workspace:
                     clean: all
-                  displayName: ${{ coalesce(project.desc, project.name) }} (API ${{ api }})
+                  displayName: ${{ coalesce(project.desc, project.name) }} (API ${{ api }}, category ${{ category }})
                   pool: ${{ parameters.androidPool }}
                   variables:
                     REQUIRED_XCODE: $(DEVICETESTS_REQUIRED_XCODE)
